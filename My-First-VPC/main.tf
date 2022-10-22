@@ -10,6 +10,28 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# INSTANCE
+resource "aws_instance" "public_subnet_EC2_1" {
+  ami                    = "ami-08c40ec9ead489470"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.public_subnet_1.id
+  vpc_security_group_ids = [aws_security_group.SG.id] #why does this need to be in brackets?
+  key_name = "newkey"
+  tags = {
+    "Name" : "Public_EC2"
+  }
+}
+resource "aws_instance" "private_subnet__EC2_1" {
+  ami                    = "ami-08c40ec9ead489470"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.private_subnet_1.id
+  vpc_security_group_ids = [aws_security_group.SG.id]
+  key_name = "newkey"
+  tags = {
+    "Name" : "Private_EC2"
+  }
+}
+
 # VPC
 resource "aws_vpc" "VPC" {
   cidr_block           = "172.23.0.0/16"
