@@ -43,7 +43,7 @@ resource "aws_subnet" "private_subnet_1" {
   availability_zone       = data.aws_availability_zones.available.names[0]
 }
 # INTERNET GATEWAY
-resource "aws_internet_gateway" "" {
+resource "aws_internet_gateway" "IG" {
   vpc_id = aws_vpc.VPC.id
 }
 # ROUTE TABLE
