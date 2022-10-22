@@ -54,7 +54,7 @@ resource "aws_route_table" "route_table" {
     gateway_id = aws_nat_gateway.NAT_GATE.id
   }
 }
-resource "aws_route_table_association" "" {
+resource "aws_route_table_association" "routetable_publicsubnet1" {
   subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.route_table.id
 }
@@ -66,7 +66,7 @@ resource "aws_route_table" "route_table_private" {
     nat_gateway_id = aws_nat_gateway.NAT_GATE.id
   }
 }
-resource "aws_route_table_association" "" {
+resource "aws_route_table_association" "routetable_privatesubnet1" {
   subnet_id      = aws_subnet.private_subnet_1.id
   route_table_id = aws_route_table.route_table_private.id
 }
