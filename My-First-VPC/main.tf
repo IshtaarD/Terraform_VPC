@@ -71,6 +71,29 @@ resource "aws_route_table_association" "routetable_privatesubnet1" {
   route_table_id = aws_route_table.route_table_private.id
 }
 
+# SEC GROUP
+resource "aws_security_group" "SG" {
+  name        = "ssh-access"
+  description = "open ssh traffic"
+  vpc_id      = aws_vpc.VPC.id
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    "Name" : "Kura_VPC_1_SG"
+    "Terraform" : "true"
+  }
+}
+
 # DATA
 data "aws_availability_zones" "available" {
   state = "available"
